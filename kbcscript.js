@@ -36,6 +36,11 @@ function startquiz() {
   const celebration = document.querySelector(".EachRound");
   const quizend = document.querySelector(".finallayout");
   const progressBar = document.querySelector(".progress-bar");
+  const tap_btn = document.querySelector(".for_next_rount_btn");
+  const scorefinal = document.querySelector(".scorefinal");
+  let rightanswerfinal = document.querySelector('.rightanswer')
+  let incorrectanswerfinal = document.querySelector('.incorrectanswer')
+  let unansweredfinal = document.querySelector('.unanswered')
 
   let questions = [];
   let remainingquestions = [];
@@ -55,6 +60,9 @@ function startquiz() {
   let difficulty_fetch_points;
   let correctanswer;
   let selectedbutton = null; // FIX
+  let rightanswer = 0;
+  let incorrectanswer = 0;
+  let unanswered = 0;
 
   Score.innerText = score;
   rounddata.innerText = `Round ${round}/3`;
@@ -109,6 +117,10 @@ function startquiz() {
       if (round < 3) {
         wellDone();
       } else {
+        rightanswerfinal.innerText = `Correct Answers: ${rightanswer}`
+        scorefinal.innerText = `Your total score: ${score} out of 4000`
+        incorrectanswerfinal.innerText = `Incorrect Answers: ${incorrectanswer}`
+        unansweredfinal.innerText = `Unanswered : ${unanswered}`
         finalimg();
       }
       return;
@@ -163,11 +175,13 @@ function startquiz() {
       selectedbutton.style.backgroundColor = "#EEFDF5";
       selectedbutton.style.color = "green";
       score += difficulty_fetch_points;
-
+      rightanswer++;
+      
       Score.innerText = score;
     } else {
       selectedbutton.style.backgroundColor = "#FDF2F2";
       selectedbutton.style.color = "red";
+      incorrectanswer++;
     }
 
     setTimeout(() => {
@@ -181,7 +195,7 @@ function startquiz() {
 
   function restart_btn() {
     score = roundstartscore;
-    Score.innerText = score;
+    Score.innerText = score;  
     if (round === 1) {
       remainingquestions = [...round1Questions];
       completedQuestions = 0;
@@ -205,12 +219,12 @@ function startquiz() {
   function wellDone() {
     layout2.style.display = "none";
     celebration.style.display = "block";
-    setTimeout(() => {
-      celebration.style.display = "none";
-      layout2.style.display = "block";
-      startnextround();
-    }, 2000);
   }
+  tap_btn.addEventListener("click", function () {
+    celebration.style.display = "none";
+    layout2.style.display = "flex";
+    startnextround();
+  });
 
   function clock() {
     clearInterval(sec);
@@ -223,6 +237,7 @@ function startquiz() {
         clearInterval(sec);
         if (!answered) {
           answered = true;
+          unanswered++;
           goToNextQuestion();
         }
       }

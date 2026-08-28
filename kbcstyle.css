@@ -5,7 +5,7 @@
 }
 body {
   background-color: rgb(242, 246, 248);
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 /* layout1 */
 .layout1 {
@@ -229,13 +229,29 @@ body.dark-mode .same_theme {
 .eachround_heading {
   font-size: 35px;
 }
+.for_next_rount_btn{
+  font-style: italic;
+  width:fit-content;
+  height:auto;
+  background-color:yellow;
+}
 
 .finallayout {
   width: 100%;
   text-align: center;
   display:none;
+  position: relative;
 }
 .finallayout img {
   width: 95vw;
+  
   height: 90vh;
+}
+.finaldiv{
+  background-color: black;
+  position: absolute;
+  top:0%;
+  padding:20px;
+  color:white;
+  right:35%;
 }
