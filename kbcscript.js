@@ -71,7 +71,6 @@ function startquiz() {
       round2Questions = [...questions.splice(0, 5)];
       round3Questions = [...questions.splice(0, 5)];
       remainingquestions = [...round1Questions];
-      console.log(remainingquestions);
       randomquestion();
     });
 
@@ -107,7 +106,6 @@ function startquiz() {
     answered = false;
     resetOptions();
     if (remainingquestions.length === 0) {
-      console.log(`round ${round} completed`);
       if (round < 3) {
         wellDone();
       } else {
