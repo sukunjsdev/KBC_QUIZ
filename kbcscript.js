@@ -164,8 +164,8 @@ function startquiz() {
     if (selectedbutton.innerText === correctanswer) {
       selectedbutton.style.backgroundColor = "#EEFDF5";
       selectedbutton.style.color = "green";
-
       score += difficulty_fetch_points;
+
       Score.innerText = score;
     } else {
       selectedbutton.style.backgroundColor = "#FDF2F2";
@@ -182,6 +182,8 @@ function startquiz() {
   });
 
   function restart_btn() {
+    score = roundstartscore;
+    Score.innerText = score;
     if (round === 1) {
       remainingquestions = [...round1Questions];
       completedQuestions = 0;
@@ -196,6 +198,7 @@ function startquiz() {
     questionN = 1;
     answered = false;
     selectedbutton = null;
+
     resetOptions();
     updateProgress();
     randomquestion();
