@@ -38,9 +38,9 @@ function startquiz() {
   const progressBar = document.querySelector(".progress-bar");
   const tap_btn = document.querySelector(".for_next_rount_btn");
   const scorefinal = document.querySelector(".scorefinal");
-  let rightanswerfinal = document.querySelector('.rightanswer')
-  let incorrectanswerfinal = document.querySelector('.incorrectanswer')
-  let unansweredfinal = document.querySelector('.unanswered')
+  let rightanswerfinal = document.querySelector(".rightanswer");
+  let incorrectanswerfinal = document.querySelector(".incorrectanswer");
+  let unansweredfinal = document.querySelector(".unanswered");
 
   let questions = [];
   let remainingquestions = [];
@@ -117,10 +117,10 @@ function startquiz() {
       if (round < 3) {
         wellDone();
       } else {
-        rightanswerfinal.innerText = `Correct Answers: ${rightanswer}`
-        scorefinal.innerText = `Your total score: ${score} out of 4000`
-        incorrectanswerfinal.innerText = `Incorrect Answers: ${incorrectanswer}`
-        unansweredfinal.innerText = `Unanswered : ${unanswered}`
+        rightanswerfinal.innerText = `Correct Answers: ${rightanswer}`;
+        scorefinal.innerText = `Your total score: ${score} out of 4000`;
+        incorrectanswerfinal.innerText = `Incorrect Answers: ${incorrectanswer}`;
+        unansweredfinal.innerText = `Unanswered : ${unanswered}`;
         finalimg();
       }
       return;
@@ -133,8 +133,9 @@ function startquiz() {
     question.innerText = currentquestion.question;
     que_out_5.innerText = questionN;
 
+    const shuffledOptions = shuffleOptions(currentquestion.options);
     option_menu.forEach((button, index) => {
-      button.innerText = currentquestion.options[index];
+      button.innerText = shuffledOptions[index];
     });
 
     correctanswer = currentquestion.correctAnswer;
@@ -143,6 +144,15 @@ function startquiz() {
     diff_line.innerText = `${difficulty_fetch} (${difficulty_fetch_points})`;
 
     clock();
+  }
+
+  function shuffleOptions(options) {
+    const shuffled = [...options];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
   }
 
   function goToNextQuestion() {
@@ -176,7 +186,7 @@ function startquiz() {
       selectedbutton.style.color = "green";
       score += difficulty_fetch_points;
       rightanswer++;
-      
+
       Score.innerText = score;
     } else {
       selectedbutton.style.backgroundColor = "#FDF2F2";
@@ -195,7 +205,7 @@ function startquiz() {
 
   function restart_btn() {
     score = roundstartscore;
-    Score.innerText = score;  
+    Score.innerText = score;
     if (round === 1) {
       remainingquestions = [...round1Questions];
       completedQuestions = 0;
