@@ -9,7 +9,7 @@ const layout1 = document.querySelector(".layout1");
 const start_btn = document.querySelector(".layout1_btn_start");
 const layout2 = document.querySelector(".layout2");
 let quizStarted = false;
-
+// click the stat button
 start_btn.addEventListener("click", function () {
   if (quizStarted) {
     return;
@@ -19,7 +19,7 @@ start_btn.addEventListener("click", function () {
   layout2.style.display = "flex";
   startquiz();
 });
-
+// after clicking the start button
 // layout 2:
 function startquiz() {
   // variables
@@ -81,7 +81,7 @@ function startquiz() {
       remainingquestions = [...round1Questions];
       randomquestion();
     });
-
+  // start the rounds
   function startnextround() {
     round++;
     roundstartscore = score;
@@ -145,7 +145,7 @@ function startquiz() {
 
     clock();
   }
-
+  // suffleOptions
   function shuffleOptions(options) {
     const shuffled = [...options];
     for (let i = shuffled.length - 1; i > 0; i--) {
@@ -154,20 +154,20 @@ function startquiz() {
     }
     return shuffled;
   }
-
+  // gotonextquestion
   function goToNextQuestion() {
     completedQuestions++;
     updateProgress();
     questionN++;
     randomquestion();
   }
-
+  // option menu btn clicklistener
   option_menu.forEach((button) => {
     button.addEventListener("click", function () {
       selectedbutton = button;
     });
   });
-
+  // click one button of options
   submit.addEventListener("click", function () {
     if (answered == true) {
       return;
@@ -198,11 +198,11 @@ function startquiz() {
       goToNextQuestion();
     }, 1000);
   });
-
+  // restart btn
   restart_round.addEventListener("click", function () {
     restart_btn();
   });
-
+  // restart the round when click on restart btn
   function restart_btn() {
     score = roundstartscore;
     Score.innerText = score;
@@ -225,7 +225,7 @@ function startquiz() {
     updateProgress();
     randomquestion();
   }
-
+  // well done stage after every round
   function wellDone() {
     layout2.style.display = "none";
     celebration.style.display = "block";
@@ -235,7 +235,7 @@ function startquiz() {
     layout2.style.display = "flex";
     startnextround();
   });
-
+  // clock
   function clock() {
     clearInterval(sec);
     secleft = 30;
@@ -253,12 +253,13 @@ function startquiz() {
       }
     }, 1000);
   }
-
+  // finalimg
   function finalimg() {
     quizend.style.display = "block";
     layout2.style.display = "none";
     celebration.style.display = "none";
   }
+  // progress updates
   function updateProgress() {
     const progress = (completedQuestions / 15) * 100;
 
